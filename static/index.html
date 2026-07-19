@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DataAI — AI Data Analyst</title>
+<link rel="stylesheet" href="/static/style.css">
+<!-- Self-hosted (no CDN dependency; works offline/firewalled). DOMPurify sanitizes
+     all markdown rendered from dataset/LLM content before it reaches innerHTML. -->
+<script src="/static/vendor/echarts.min.js"></script>
+<script src="/static/vendor/marked.min.js"></script>
+<script src="/static/vendor/purify.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="brand">Data<span>AI</span></div>
+  <div class="tagline">Upload a dataset · get charts, a summary and an analyst you can talk to</div>
+</header>
+
+<!-- ============ 1. UPLOAD ============ -->
+<section id="view-upload" class="view active">
+  <div class="upload-card" id="dropzone">
+    <div class="upload-icon">⬆</div>
+    <h2>Drop your dataset here</h2>
+    <p>CSV, TSV or Excel (.xlsx — every sheet is analyzed) · up to 50&nbsp;MB</p>
+    <input type="file" id="file-input" accept=".csv,.tsv,.txt,.xls,.xlsx,.xlsm" hidden>
+    <button class="btn primary" id="browse-btn">Choose a file</button>
+    <div class="error" id="upload-error"></div>
+  </div>
+  <div class="how">
+    <div class="how-step"><b>1 · Organize</b>Your file becomes a private DuckDB database</div>
+    <div class="how-step"><b>2 · Analyze</b>Agents profile columns and test every meaningful relationship</div>
+    <div class="how-step"><b>3 · Explain</b>AI ranks the insights, draws the charts, writes the summary</div>
+    <div class="how-step"><b>4 · Ask</b>The chatbot answers with real SQL through an MCP server — never guesses</div>
+  </div>
+</section>
+
+<!-- ============ 2. PROCESSING ============ -->
+<section id="view-processing" class="view">
+  <div class="processing-card">
+    <div class="spinner"></div>
+    <h2 id="processing-stage">Uploading…</h2>
+    <p id="processing-file"></p>
+  </div>
+</section>
+
+<!-- ============ 3. DASHBOARD ============ -->
+<section id="view-dashboard" class="view">
+  <div class="dash-layout">
+    <main class="dash-main">
+      <div class="dash-head">
+        <h1 id="ds-title"></h1>
+        <div>
+          <span class="pill" id="ds-pill"></span>
+          <button class="btn ghost" onclick="location.reload()">New dataset</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Summary</h3>
+        <div id="summary" class="markdown"></div>
+        <div id="quality-notes"></div>
+      </div>
+
+      <h3 class="sect">Key insights</h3>
+      <div id="insights" class="insights-grid"></div>
+
+      <h3 class="sect">Visualizations</h3>
+      <div id="charts" class="charts-grid"></div>
+
+      <h3 class="sect">Schema</h3>
+      <div id="schema" class="card schema"></div>
+    </main>
+
+    <aside class="chat-panel">
+      <div class="chat-head">💬 Ask the analyst</div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg assistant">Hi! Ask me anything about this dataset — averages, trends,
+        comparisons, “show me a chart of…”. I answer by querying your data directly.</div>
+      </div>
+      <form class="chat-input" id="chat-form">
+        <input id="chat-text" type="text" placeholder="e.g. Which category has the highest average revenue?" autocomplete="off">
+        <button class="btn primary" type="submit" id="chat-send">Send</button>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
