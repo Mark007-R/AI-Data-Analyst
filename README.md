@@ -1,5 +1,5 @@
 ---
-title: DataAI — AI Data Analyst
+title: AI Data Analyst
 emoji: 📊
 colorFrom: blue
 colorTo: indigo
@@ -8,11 +8,11 @@ app_port: 7860
 pinned: false
 ---
 
-# DataAI — AI Data Analyst
+# AI-Data-Analyst
 
 **🌐 Live demo:** [iambatman07-dataai.hf.space](https://iambatman07-dataai.hf.space/) ·
 **🤗 Space:** [IamBatman07/DataAI](https://huggingface.co/spaces/IamBatman07/DataAI) ·
-**📦 Source:** [github.com/Mark007-R/DataAI](https://github.com/Mark007-R/DataAI)
+**📦 Source:** [github.com/Mark007-R/AI-Data-Analyst](https://github.com/Mark007-R/AI-Data-Analyst)
 
 Upload any CSV / TSV / Excel dataset and get:
 
