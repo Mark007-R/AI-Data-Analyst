@@ -1,5 +1,8 @@
 # DataAI — Architecture & Engineering Notes
 
+**Live demo:** <https://iambatman07-dataai.hf.space/> ·
+**Source:** <https://github.com/Mark007-R/DataAI>
+
 DataAI is a web app where a user uploads a dataset (CSV / XLSX / TSV — multi-sheet Excel
 supported), a multi-stage pipeline analyzes it, and the app serves a page with:
 

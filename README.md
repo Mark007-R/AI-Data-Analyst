@@ -10,6 +10,10 @@ pinned: false
 
 # DataAI — AI Data Analyst
 
+**🌐 Live demo:** [iambatman07-dataai.hf.space](https://iambatman07-dataai.hf.space/) ·
+**🤗 Space:** [IamBatman07/DataAI](https://huggingface.co/spaces/IamBatman07/DataAI) ·
+**📦 Source:** [github.com/Mark007-R/DataAI](https://github.com/Mark007-R/DataAI)
+
 Upload any CSV / TSV / Excel dataset and get:
 
 - 📝 **A written summary** of what the data contains and what matters in it
@@ -57,3 +61,6 @@ chatbot and LLM-written summary are disabled.
 Ships as a Docker image (`Dockerfile`, port 7860) — deploys as-is to a Hugging Face
 Space with `sdk: docker`. Set `ANTHROPIC_API_KEY` as a Space secret to enable the LLM
 features.
+
+Live deployment: **<https://iambatman07-dataai.hf.space/>**
+(Space: [IamBatman07/DataAI](https://huggingface.co/spaces/IamBatman07/DataAI))
