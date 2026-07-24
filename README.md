@@ -10,8 +10,8 @@ pinned: false
 
 # AI-Data-Analyst
 
-**🌐 Live demo:** [iambatman07-dataai.hf.space](https://iambatman07-dataai.hf.space/) ·
-**🤗 Space:** [IamBatman07/DataAI](https://huggingface.co/spaces/IamBatman07/DataAI) ·
+**🌐 Live demo:** [iambatman07-ai-data-analyst.hf.space](https://iambatman07-ai-data-analyst.hf.space/) ·
+**🤗 Space:** [IamBatman07/AI-Data-Analyst](https://huggingface.co/spaces/IamBatman07/AI-Data-Analyst) ·
 **📦 Source:** [github.com/Mark007-R/AI-Data-Analyst](https://github.com/Mark007-R/AI-Data-Analyst)
 
 Upload any CSV / TSV / Excel dataset and get:
@@ -62,5 +62,5 @@ Ships as a Docker image (`Dockerfile`, port 7860) — deploys as-is to a Hugging
 Space with `sdk: docker`. Set `ANTHROPIC_API_KEY` as a Space secret to enable the LLM
 features.
 
-Live deployment: **<https://iambatman07-dataai.hf.space/>**
-(Space: [IamBatman07/DataAI](https://huggingface.co/spaces/IamBatman07/DataAI))
+Live deployment: **<https://iambatman07-ai-data-analyst.hf.space/>**
+(Space: [IamBatman07/AI-Data-Analyst](https://huggingface.co/spaces/IamBatman07/AI-Data-Analyst))
