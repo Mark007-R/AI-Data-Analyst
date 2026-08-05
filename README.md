@@ -33,8 +33,7 @@ Upload any CSV / TSV / Excel dataset and get:
    `search_text`
 
 The dashboard, charts and template summary work with **no API key**; a key enables the
-LLM-written summary and the chatbot. Full architecture and engineering notes:
-[progress.md](progress.md)
+LLM-written summary and the chatbot.
 
 ## Run locally
 
