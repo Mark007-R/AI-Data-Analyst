@@ -170,9 +170,80 @@ async function loadDashboard() {
   echartsInstances.forEach(c => c.resize());
 }
 
+/* ---- chart theme: mark.dev after dark, same tokens as static/style.css (presentation only) ---- */
+const NIGHT = {
+  ink: "#f4ede4", ink2: "#c9bcae", ink3: "#9a8c7f",
+  line: "#2f2823", lineStrong: "#463b33", card: "#1f1a17", accent: "#6E97F2",
+  fontBody: "Inter, -apple-system, 'Segoe UI', sans-serif",
+  fontDisplay: "Fraunces, Georgia, serif",
+};
+// Night Cobalt first, then warm neutrals that read on the dark ground.
+const NIGHT_SERIES = ["#6E97F2", "#b3a595", "#d9b48f", "#f4ede4",
+                      "#4B74E3", "#7d6f63", "#8FB0F6", "#c08a5f"];
+// Diverging scale for correlation heatmaps: warm copper ← dark card → accent.
+const NIGHT_DIVERGING = ["#d9825f", "#2f2823", "#6E97F2"];
+
+const nightAxis = () => ({
+  axisLine: { lineStyle: { color: NIGHT.lineStrong } },
+  axisTick: { lineStyle: { color: NIGHT.lineStrong } },
+  axisLabel: { color: NIGHT.ink2, fontFamily: NIGHT.fontBody },
+  nameTextStyle: { color: NIGHT.ink2, fontFamily: NIGHT.fontBody },
+  splitLine: { lineStyle: { color: NIGHT.line } },
+  splitArea: { areaStyle: { color: ["rgba(244, 237, 228, .02)", "transparent"] } },
+});
+
+echarts.registerTheme("night", {
+  // The ground is transparent, so tell ECharts it sits on dark; otherwise its automatic
+  // label colours assume a light page (dark text with a white halo).
+  darkMode: true,
+  color: NIGHT_SERIES,
+  backgroundColor: "transparent",
+  textStyle: { fontFamily: NIGHT.fontBody, color: NIGHT.ink2 },
+  title: {
+    textStyle: { color: NIGHT.ink, fontFamily: NIGHT.fontDisplay, fontWeight: 600 },
+    subtextStyle: { color: NIGHT.ink3, fontFamily: NIGHT.fontBody },
+  },
+  categoryAxis: nightAxis(),
+  valueAxis: nightAxis(),
+  logAxis: nightAxis(),
+  timeAxis: nightAxis(),
+  legend: {
+    textStyle: { color: NIGHT.ink2, fontFamily: NIGHT.fontBody },
+    inactiveColor: NIGHT.lineStrong,
+    pageTextStyle: { color: NIGHT.ink2 },
+    pageIconColor: NIGHT.accent, pageIconInactiveColor: NIGHT.lineStrong,
+  },
+  tooltip: {
+    backgroundColor: NIGHT.card, borderColor: NIGHT.lineStrong, borderWidth: 1,
+    textStyle: { color: NIGHT.ink, fontFamily: NIGHT.fontBody },
+    extraCssText: "box-shadow: 0 16px 40px rgba(0, 0, 0, .45); border-radius: 10px;",
+    axisPointer: {
+      lineStyle: { color: NIGHT.lineStrong },
+      crossStyle: { color: NIGHT.lineStrong },
+      shadowStyle: { color: "rgba(110, 151, 242, .10)" },
+    },
+  },
+  visualMap: { textStyle: { color: NIGHT.ink2, fontFamily: NIGHT.fontBody } },
+  dataZoom: {
+    backgroundColor: "transparent", borderColor: NIGHT.line,
+    fillerColor: "rgba(110, 151, 242, .16)", handleStyle: { color: NIGHT.accent },
+    textStyle: { color: NIGHT.ink2 },
+  },
+  pie: {
+    itemStyle: { borderColor: NIGHT.card, borderWidth: 1 },
+    label: { color: NIGHT.ink2, textBorderWidth: 0 },
+  },
+  markPoint: { label: { color: "#14110f" } },
+});
+
 function renderChart(el, option) {
-  const chart = echarts.init(el, "dark", { renderer: "canvas" });
+  const chart = echarts.init(el, "night", { renderer: "canvas" });
   option.backgroundColor = "transparent";
+  // Repaint server-supplied palettes in the night colours — presentation only.
+  option.color = NIGHT_SERIES;
+  [].concat(option.visualMap || []).forEach(vm => {
+    if (vm && vm.inRange && Array.isArray(vm.inRange.color)) vm.inRange.color = NIGHT_DIVERGING;
+  });
   chart.setOption(option);
   echartsInstances.push(chart);
 }
